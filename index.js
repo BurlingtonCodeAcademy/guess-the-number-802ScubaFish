@@ -41,7 +41,7 @@ async function computerGuesses() {
   let answer = await ask('Is your number ' + computerGenNum + ' (yes / no)' + '?\n')
 
   // While the answer is not "yes/correct"
-  while (answer !== 'yes') {
+  while (answer !== 'yes' && answer === 'no') {
     let highLow = await ask('Is your number lower or higher or correct?\n');
     highLow = highLow.trim().toLowerCase()
     if (highLow === 'higher') {
@@ -66,6 +66,9 @@ async function computerGuesses() {
   if (answer.toLowerCase() === 'yes') {
     console.log('I have Won!\n' + 'Skynet Activated')
     humanGuesses()
+  } else {
+    console.log('Error! Invalid Input, Please Start Again')
+    process.exit()
   }
 }
 
