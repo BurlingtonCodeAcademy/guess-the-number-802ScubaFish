@@ -9,18 +9,18 @@ function ask(questionText) {
     rl.question(questionText, resolve);
   });
 }
-// Return Random Number Funciton
+// Return Random Number Function for Human Guesses Version of Game
 function randomNum(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min)
 }
-// Return Mid Value Function (whole number)
+// Return Mid Value Function (whole number) for Computer Guesses Version of Game
 function midValue(min, max) {
   return Math.floor((min + max) / 2)
 }
-// Start Game Function
+// Initial Start Game Function 
 start()
 async function start() {
-  console.log('Welcome to my Guessing Game!\n' + '*Games alternate after intital selection*\n')
+  console.log('Welcome to my Guessing Game!\n' + '*Games alternate after initial selection*\n')
   let gameChoice = await ask('To Start Please Choose Either Computer Guesses or Human Guesses\n')
   gameChoice = gameChoice.trim().toLowerCase()
   if (gameChoice == 'computer guesses') {
@@ -40,6 +40,7 @@ async function computerGuesses() {
   console.log("Please choose a secret number within your chosen range now and remember it")
   let answer = await ask('Is your number ' + computerGenNum + ' (yes / no)' + '?\n')
 
+  // While the answer is not "yes/correct"
   while (answer !== 'yes') {
     let highLow = await ask('Is your number lower or higher or correct?\n');
     highLow = highLow.trim().toLowerCase()
@@ -56,15 +57,18 @@ async function computerGuesses() {
       humanGuesses()
     } else {
       console.log('Unrecognized input, Try Again')
-    } if (userMaxRange < userMinRange) {
+    }
+    if (userMaxRange < userMinRange) {
       console.log('Cheater! Start Over')
       process.exit()
     }
-  } if (answer.toLowerCase() === 'yes') {
+  }
+  if (answer.toLowerCase() === 'yes') {
     console.log('I have Won!\n' + 'Skynet Activated')
     humanGuesses()
   }
 }
+
 // Human Guess Game Function
 async function humanGuesses() {
   console.log('\nYou have now entered Mode: Human Guesses\n' + 'To play this game please choose a numerical range for the game(ex. 1 to 100)')
